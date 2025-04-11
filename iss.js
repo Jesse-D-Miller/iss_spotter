@@ -84,10 +84,20 @@ const fetchISSFlyOverTimes = (coords, callback) => {
       callback(Error(msg3), null);
       return;
     }
-    
+
     callback(null, body.response);
     
   });
 };
 
-module.exports = { fetchMyIP, fetchCoordsByIp, fetchISSFlyOverTimes };
+//function with call back
+//takes in array of objects (responses)
+//for each loop interation for outputs (outputs in index)
+//////
+const nextISSTimesForMyLocation = (nextPassTime) => {
+  const datetime = new Date(nextPassTime.risetime * 1000);
+  const duration = nextPassTime.duration;
+  return `Next pass at ${datetime.toString()} for ${duration} seconds!`;
+};
+
+module.exports = { fetchMyIP, fetchCoordsByIp, fetchISSFlyOverTimes, nextISSTimesForMyLocation };
