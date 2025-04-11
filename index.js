@@ -25,9 +25,12 @@ fetchMyIP((error, ip) => {
       }
       console.log(`It Worked! Here is the flyover data:\n ${responseObject}`);
 
+      console.log("\n");
       responseObject.forEach(nextPassTime => {
         console.log(nextISSTimesForMyLocation(nextPassTime));
       });
+      console.log("\n");
+      return;
     });
   });
 });
