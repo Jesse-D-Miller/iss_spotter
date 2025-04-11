@@ -72,7 +72,7 @@ const fetchCoordsByIp = (ip, callback) => {
 
 // As output you get the same inputs back (for checking) and a time stamp when the API ran in addition to a success or failure message and a list of passes. Each pass has a duration in seconds and a rise time as a unix time stamp.
 
-const fetchISSFlyOverTies = (coords, callback) => {
+const fetchISSFlyOverTimes = (coords, callback) => {
   needle.get(`https://iss-flyover.herokuapp.com/json/?lat=${coords.latitude}&lon=${coords.longitude}`, (error, response, body) => {
 
     if (error) {
@@ -80,14 +80,8 @@ const fetchISSFlyOverTies = (coords, callback) => {
     }
 
     if (response.statusCode !== 200) {
-      const msg3 = `Status code ${response.statusCode} when fetching data for fly over times. Response ${body}`;
+      const msg3 = `Status code ${response.statusCode} when fetching data for fly over times.\nResponse: "${body}"`;
       callback(Error(msg3), null);
-      return;
-    }
-
-    if (body === "invalid coordinates") {
-      const msg4 = `${body}: Please try again with valid coordinates`;
-      callback(Error(msg4), null);
       return;
     }
     
@@ -96,4 +90,4 @@ const fetchISSFlyOverTies = (coords, callback) => {
   });
 };
 
-module.exports = { fetchMyIP, fetchCoordsByIp, fetchISSFlyOverTies };
+module.exports = { fetchMyIP, fetchCoordsByIp, fetchISSFlyOverTimes };
